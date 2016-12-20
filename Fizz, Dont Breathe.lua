@@ -114,14 +114,14 @@ end
 
 function Combo(Target)
 
-	if InRange(Target,1200) then
+	if InRange(Target,1200) then^3
 		
 			if (CanUse(_Q) and myHero.mana >= GetManaCost(_Q) + GetManaCost(_E)) or InRange(Target,600) then
 			
 				CastR(Target)
 				CastE(Target)
 				CastQ(Target)
-			    DelayAction(function() if InRange(Target,myHero.range) and TargetDoted(Target) or InRange(Target,myHero.range) then CastW() end end,2.1)
+			    DelayAction(function() if InRange(Target,myHero.range) and TargetDoted(Target) or InRange(Target,myHero.range + myHero.boundingRadius + Target.boundingRadius) then CastW() end end,2.1)
 				
 			end		
 	end
@@ -129,7 +129,8 @@ end
 
 function TargetDoted(Target)
 
-
+    -- return TargetHaveBuff("fizzdot", Target)
+	
 	for i= 20,1,-1 do 
 	
 	if Target:getBuff(i).name ~= nil and Target:getBuff(i).name:find("dot") then
@@ -339,5 +340,5 @@ end
 
 function InRange(Target,range)
 
-	if GetDistance(Target) < range then return true else return false end
+	if GetDistanceSqr(Target) < range*range then return true else return false end
 end
