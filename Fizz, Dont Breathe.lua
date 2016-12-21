@@ -114,7 +114,7 @@ end
 
 function Combo(Target)
 
-	if InRange(Target,1200) then^3
+	if InRange(Target,1200) then
 		
 			if (CanUse(_Q) and myHero.mana >= GetManaCost(_Q) + GetManaCost(_E)) or InRange(Target,600) then
 			
